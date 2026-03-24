@@ -19,6 +19,15 @@ router.get('/', function(req, res, next) {
     res.send(users);
 });
 
+router.get('/:id', function(req, res, next) {
+    const user = users.items.find(user => user.id == req.params.id);
+    if (!user) {
+        res.status(404).send('Not Found');
+    } else {
+        res.send(user);
+    }
+})
+
 router.post('/', function(req, res, next) {
     const newUser = req.body;
     users.items.push(newUser);
